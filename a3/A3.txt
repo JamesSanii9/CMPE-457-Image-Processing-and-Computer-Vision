@@ -1,0 +1,78 @@
+CMPE/CISC 457 - Assignment 3
+
+Due Friday, December 3 at noon
+
+You are to implement LZW image compression with predictive encoding.
+Your implementation is to be efficient.  There are lots of Python LZW
+examples on the net.  Do not copy those.  Write your own code.
+
+1. Try the sample code.  Create a compressed image, cortex.cmp, as follows:
+
+     python3 main.py c images/cortex.pnm cortex.cmp
+
+   Uncompress the same file as follows:
+
+     python3 main.py u cortex.cmp uncompressed.pnm
+
+   Then images/cortex.pnm and uncompressed.pnm should be exactly the
+   same file.  Note that the skeleton code in main.py does not
+   actually compress anything.
+
+   You can view a pnm file with, for example:
+
+     python3 netpbm.py images/cortex.pnm
+
+   If viewing, you'll need to install the Python 'matplotlib' library.
+
+2. Implement LZW compression with predictive encoding in the
+   compress() function.  You should predictively encode each channel
+   of a pixel separately, using the corresponding channel from the
+   previous pixel.  Use LZW to compress the *difference* between the
+   true channel value and the predicted channel value.  Note that the
+   image might have any number of channels per pixel.  Do not allow
+   your dictionary to exceed 65536 entries; this allows you to encode
+   each index as an unsigned two-byte integer.
+
+   The code will be marked for efficiency and compression ratio.  You
+   may use a Python dictionary for the LZW dictionary.
+
+3. Implement LZW decompression with predictive decoding in the
+   uncompress() function.  A correct implementation will return
+   exactly the same file if you first compress the file, then
+   uncompress it.
+
+4. In a 'README.txt' file, create a table of compression results
+   with one line for each PNM file in the 'images' directory, and
+   one column for each of
+
+      filename
+      compression time
+      decompression time
+      compression ratio
+      compression ratio of zipped image
+
+   where you determine the last column using the zipped images that
+   are provided.
+
+   Note, just for your own interest, the compressed sizes of
+   cortex.png (lossless) and cortex.jpg (lossy).
+
+
+To hand in:
+
+  Submit two files:
+
+     - main.py
+
+     - README.txt: This file includes the compression results.  Also,
+       at the TOP of the file, provide your name(s), student
+       number(s), and email(s), as well as any comments to the TA.
+
+   YOU WILL LOSE MARKS IF YOU DO NOT SUBMIT TWO FILES WITH EXACTLY THE
+   NAMES ABOVE.
+
+   IN A GROUP OF TWO, ONLY ONE PERSON MAY SUBMIT THE ASSIGNMENT.  IF
+   YOUR GROUP SUBMITS TWO ASSIGNMENTS, YOU WILL LOSE MARKS.
+
+For marking, we will read your code for correctness, clarity, quality,
+and efficiency, and we will run your code.
